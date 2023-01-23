@@ -18,6 +18,14 @@ Program ini digunakan untuk mencari semua kemungkinan operasi matematis yang dap
 ### Keperluan
 1. MinGW64 untuk *compiling* c++
 
+### Deskripsi *Directory*
+1. folder bin <br>
+berisikan *file executable*
+2. folder doc <br>
+berisikan *file laporan*
+3. folder src <br>
+berisikan *file source code*
+
 ### Memulai program
 1. *Clone repository* ini dengan link berikut <br>
 `https://github.com/HoseaNA/Tucil1_13521057`
