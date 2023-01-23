@@ -1,9 +1,19 @@
-#include <stdio.h>
-#include <possibilities.h>
+#include "possibilities.h"
 
-void allOps(char **allOps)
+bool validateNum(char num)
 {
-    char **arrOps;
+    if (num != 'A' || num != '2' || num != '3' || num != '4' || num != '5' || num != '6' || num != '7' || num != '8' || num != '9' || num != '10' || num != 'J' || num != 'Q' || num != 'K')
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    } 
+}
+
+void Ops(char allOps[64][3])
+{
     char ops[4] = {'+', '-', '*', '/'};
     int cnt = 0;
     for (int i = 0; i < 4; i++)
@@ -12,20 +22,18 @@ void allOps(char **allOps)
         {
             for (int k = 0; k < 4; k++)
             {
-                arrOps[cnt][0] = ops[i];
-                arrOps[cnt][1] = ops[j];
-                arrOps[cnt][2] = ops[k];
+                allOps[cnt][0] = ops[i];
+                allOps[cnt][1] = ops[j];
+                allOps[cnt][2] = ops[k];
                 cnt++;
             }
         }
     }
-    return arrOps;
 }
 
-void allNums(int **allNums, int *nums)
+void Nums(float allNums[24][4], float nums[4])
 {
-    int i, j, k, l, cnt;
-    int **allNums;
+    int i, j, k, l, cnt = 0;
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 4; j++)
