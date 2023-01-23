@@ -156,7 +156,7 @@ void numsRandom(float numbers[])
         cout << cardList[number] << " ";
         numbers[i] = (float)(number + 1);
     }
-    cout << "\n";
+    cout << "\n\n";
 }
 
 void mainCounter(float numbers[4])
@@ -175,34 +175,27 @@ void mainCounter(float numbers[4])
     {
         for (int j = 0; j < 64; j++)
         {
-            /* All Possibilities
-            ((A B) C) D
-            (A (B C)) D
-            A (B (C D))
-            A ((B C) D)
-            (A B) (C D)
-            */
-            if (abs(combination(allNums[i], allOps[j], 1) - 24) < 0.00001)
+            if (abs(combination(allNums[i], allOps[j], 1) - 24) < 0.00001) /*((A B) C) D*/
             {
                 solutions << "((" << allNums[i][0] << allOps[j][0] << allNums[i][1] << ")" << allOps[j][1] << allNums[i][2] << ")" << allOps[j][2] << allNums[i][3] << endl;
                 cntSolution++;
             }
-            if (abs(combination(allNums[i], allOps[j], 2) - 24) < 0.00001)
+            if (abs(combination(allNums[i], allOps[j], 2) - 24) < 0.00001) /*(A (B C)) D*/
             {
                 solutions << "(" << allNums[i][0] << allOps[j][0] << "(" << allNums[i][1] << allOps[j][1] << allNums[i][2] << "))" << allOps[j][2] << allNums[i][3] << endl;
                 cntSolution++;
             }
-            if (abs(combination(allNums[i], allOps[j], 3) - 24) < 0.00001)
+            if (abs(combination(allNums[i], allOps[j], 3) - 24) < 0.00001) /*A (B (C D))*/
             {
                 solutions << allNums[i][0] << allOps[j][0] << "(" << allNums[i][1] << allOps[j][1] << "(" << allNums[i][2] << allOps[j][2] << allNums[i][3] << "))" << endl;
                 cntSolution++;
             }
-            if (abs(combination(allNums[i], allOps[j], 4) - 24) < 0.00001)
+            if (abs(combination(allNums[i], allOps[j], 4) - 24) < 0.00001) /*A ((B C) D)*/
             {
                 solutions << allNums[i][0] << allOps[j][0] << "((" << allNums[i][1] << allOps[j][1] << allNums[i][2] << ")" << allOps[j][2] << allNums[i][3] << ")" << endl;
                 cntSolution++;
             }
-            if (abs(combination(allNums[i], allOps[j], 5) - 24) < 0.00001)
+            if (abs(combination(allNums[i], allOps[j], 5) - 24) < 0.00001) /*(A B) (C D)*/
             {
                 solutions << "(" << allNums[i][0] << allOps[j][0] << allNums[i][1] << ")" << allOps[j][1] << "(" << allNums[i][2] << allOps[j][2] << allNums[i][3] << ")" << endl;
                 cntSolution++;
@@ -214,7 +207,7 @@ void mainCounter(float numbers[4])
 
     cout << "Terdapat " << cntSolution << " solusi\n";
     cout << solutions.str() << endl;
-    cout << "Runtime :" << runTime.count() * 1e-9 << endl;
+    cout << "Runtime :" << runTime.count() * 1e-9 << " Detik\n" << endl;
 
     cout << "Apakah ingin disimpan dalam file?\n(y/Y untuk ya n/N untuk tidak)\n";
     char choice;
@@ -225,35 +218,44 @@ void mainCounter(float numbers[4])
         cout << "Masukkan nama file :\n";
         cin >> path;
         ofstream file;
-        file.open("../test/" + path + ".txt");
+        file.open("./test/" + path + ".txt");
         file << "Terdapat " << cntSolution << " solusi" << endl
              << solutions.str() << endl
-             << "Runtime :" << runTime.count() * 1e-9 << endl;
+             << "Runtime :" << runTime.count() * 1e-9 << " Detik"<< endl;
         file.close();
-        cout << "Berhasil menuliskan hasil pada file " << path << ".txt\nThank you and goodbye :)\n";
+        cout << "Berhasil menuliskan hasil pada file " << path << ".txt\nThank you and goodbye :)\n\n";
     }
     else if (choice == 'n' || choice == 'N')
     {
-        cout << "Ok, bye >:(\n";
+        cout << "Ok, bye >:(\n\n";
     }
 }
 
 int main()
 {
-    int choice;
-    cout << "Ketik 1 untuk input manual\nKetik 2 untuk input random\n";
-    cin >> choice;
-
     float numbers[4];
-    if (choice == 1)
+    bool running = true;
+    while (running)
     {
-        numsManual(numbers);
-        mainCounter(numbers);
-    }
-    else if (choice == 2)
-    {
-        numsRandom(numbers);
-        mainCounter(numbers);
+        int choice;
+        cout << "24 Game Solver with Brute Force\nBy Hosea N.A.\n\n";
+        cout << "Pilih cara input\n";
+        cout << "Ketik 1 untuk input manual\nKetik 2 untuk input random\nKetik 3 untuk keluar dari program\n";
+        cin >> choice;
+        if (choice == 1)
+        {
+            numsManual(numbers);
+            mainCounter(numbers);
+        }
+        else if (choice == 2)
+        {
+            numsRandom(numbers);
+            mainCounter(numbers);
+        }
+        else if (choice == 3)
+        {
+            running = false;
+        }
     }
     return 0;
 }

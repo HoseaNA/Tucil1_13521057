@@ -1,0 +1,3 @@
+Terdapat 0 solusi
+
+Runtime :0.0002756 Detik
