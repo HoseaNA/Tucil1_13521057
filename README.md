@@ -30,7 +30,7 @@ berisikan *file source code*
 1. *Clone repository* ini dengan link berikut <br>
 `https://github.com/HoseaNA/Tucil1_13521057`
 
-2. *Compile file* .exe (pastikan berada pada folder Tucil1_13521057) <br>
+2. *Compile file* .exe (pastikan berada pada folder bin) <br>
 `g++ ../src/main.cpp -o run`
 
 3. Jalankan *file* .exe (pastikan berada pada folder Tucil1_13521057) <br>
