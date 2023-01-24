@@ -33,7 +33,7 @@ berisikan *file source code*
 2. *Compile file* .exe (pastikan berada pada folder Tucil1_13521057) <br>
 `g++ ../src/main.cpp -o run`
 
-3. Jalankan *file* .exe <br>
+3. Jalankan *file* .exe (pastikan berada pada folder Tucil1_13521057) <br>
 `./bin/run`
 
 ### Pembuat
