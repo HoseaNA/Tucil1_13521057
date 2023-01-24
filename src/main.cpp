@@ -8,6 +8,10 @@
 #include <string.h>
 using namespace std;
 
+/* Mengihitung hasil antara dua buah nilai menggunakan operator yang ditentukan dengan format A op B
+A merupakan nilai pertama,
+B merupakan nilai kedua,
+dan op merupakan operator yang digunakan*/
 float count(float num1, float num2, char op)
 {
     if (op == '+')
@@ -32,6 +36,7 @@ float count(float num1, float num2, char op)
     }
 }
 
+/* Menghitung hasil operasi keseluruhan berdasarkan 5 kombinasi posisi tanda kurung*/
 float combination(float numbers[4], char ops[3], int comb)
 {
     if (comb == 1) /*((A B) C) D*/
@@ -56,6 +61,8 @@ float combination(float numbers[4], char ops[3], int comb)
     }
 }
 
+/* Menghasilkan semua kombinasi posisi operator,
+allOps merupakan hasil semua kombinasi posisi operator */
 void Ops(char allOps[64][3])
 {
     char ops[4] = {'+', '-', '*', '/'};
@@ -75,6 +82,9 @@ void Ops(char allOps[64][3])
     }
 }
 
+/* Menghasilkan semua kombinasi angka berdasarkan posisinya dalam perhitungan,
+allNums adalah hasil semua kombinasi,
+dan numbers adalah angka yang dicari kombinasinya */
 void Nums(float allNums[24][4], float numbers[4])
 {
     int i, j, k, l, cnt = 0;
@@ -100,6 +110,9 @@ void Nums(float allNums[24][4], float numbers[4])
     }
 }
 
+/* Menerima input secara manual dari user dalam bentuk string dan diubah menjadi float yang kemudian
+disimpan dalam sebuah array,
+numbers adalah array yang berisi input */
 void numsManual(float numbers[4])
 {
     map<string, float> HashInput;
@@ -132,6 +145,8 @@ void numsManual(float numbers[4])
     }
 }
 
+/* Menghasilkan 4 angka secara random yang kemudian dimasukkan nilainya dalam sebuah array,
+numbers merupakan array yang menjadi input */
 void numsRandom(float numbers[])
 {
     string cardList[13] = {"A",
@@ -159,6 +174,8 @@ void numsRandom(float numbers[])
     cout << "\n\n";
 }
 
+/* Fungsi utama yang mengatur perhitungan dan penyimpanan solusi program, banyak solusi, dan lama waktu pencarian solusi,
+numbers merupakan input yang dicari solusinya */
 void mainCounter(float numbers[4])
 {
     char allOps[64][3];
@@ -205,9 +222,19 @@ void mainCounter(float numbers[4])
     auto timeEnd = std::chrono::high_resolution_clock::now();
     auto runTime = std::chrono::duration_cast<std::chrono::nanoseconds>(timeEnd - timeStart);
 
-    cout << "Terdapat " << cntSolution << " solusi\n";
-    cout << solutions.str() << endl;
-    cout << "Runtime :" << runTime.count() * 1e-9 << " Detik\n" << endl;
+    if (cntSolution > 0)
+    {
+        cout << "Terdapat " << cntSolution << " solusi\n";
+        cout << solutions.str() << endl;
+        cout << "Runtime : " << runTime.count() * 1e-9 << " Detik\n"
+             << endl;
+    }
+    else
+    {
+        cout << "Tidak ada solusi\n\n";
+        cout << "Runtime : " << runTime.count() * 1e-9 << " detik\n"
+             << endl;
+    }
 
     cout << "Apakah ingin disimpan dalam file?\n(y/Y untuk ya n/N untuk tidak)\n";
     char choice;
@@ -219,10 +246,18 @@ void mainCounter(float numbers[4])
         cin >> path;
         ofstream file;
         file.open("./test/" + path + ".txt");
-        file << "Terdapat " << cntSolution << " solusi" << endl
-             << solutions.str() << endl
-             << "Runtime :" << runTime.count() * 1e-9 << " Detik"<< endl;
-        file.close();
+        if (cntSolution > 0)
+        {
+            file << "Terdapat " << cntSolution << " solusi" << endl
+                 << solutions.str() << endl
+                 << "Runtime :" << runTime.count() * 1e-9 << " Detik" << endl;
+            file.close();
+        }
+        else
+        {
+            file << "Tidak ada solusi\n\n"
+                 << "Runtime : " << runTime.count() * 1e-9 << " detik" << endl;
+        }
         cout << "Berhasil menuliskan hasil pada file " << path << ".txt\nThank you and goodbye :)\n\n";
     }
     else if (choice == 'n' || choice == 'N')
@@ -231,6 +266,8 @@ void mainCounter(float numbers[4])
     }
 }
 
+/* Program yang dieksekusi di awal. Fungsi ini menentukan input secara manual atau random
+dan menghentikan program secara keseluruhan. */
 int main()
 {
     float numbers[4];
